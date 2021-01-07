@@ -1,0 +1,10 @@
+{
+    
+    "token": "bot token",
+    "prefix": "prefix",
+    "owner": "id of the owner",
+    "youtubeAPI": "youtube api key",
+    "PRUNING": false,
+    "lastfm": "lastfm api key"
+
+}
