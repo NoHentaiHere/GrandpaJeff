@@ -18,11 +18,12 @@ module.exports = {
         .addFields(
             { name: "Development version: ", value: botInfo.version },
             { name: "Description: ", value: botInfo.description },
+            { name: "Source Code: ", value: `<https://github.com/NoHentaiHere/GrandpaJeff>` },
             { name: "Node.js version: ", value: process.version },
             { name: "Discord.js version: ", value: botInfo.dependencies['discord.js'].replace('^', 'v'), inline: false },
             { name: "Author: ", value: botInfo.author },
             { name: "Memory Usage: ", value: `${Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100} MB` },
-            { name: "Current Uptime: ", value: `${uptime}` })
+            { name: "Current Uptime: ", value: `${uptime}` },)
         await message.channel.send({ embed: embed})
         
       }

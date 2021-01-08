@@ -1,6 +1,6 @@
 {
   "name": "grandpajeff",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Discord bot that is still in development, type ``%help`` to find out about my current list of commands",
   "main": "main.js",
   "scripts": {
