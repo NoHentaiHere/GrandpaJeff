@@ -1,8 +1,8 @@
 const ytsrc = require("youtube-sr");
 module.exports = {
     name: 'yt',
-    aliases: ['yt', 'ytsrc'],
-    description: "Searches for youtube videos",
+    aliases: ['ytc', 'ytchannel'],
+    description: "Searches for youtube channels",
     usage: `<your search input>`,
     cooldown: 3,
     execute: async(client, message, args ) => {
@@ -12,7 +12,7 @@ module.exports = {
             message.channel.send(`You didn't search for anything`)
         } else {
             ytsrc.search(`${args}`, { limit: 10 })
-        .then(x => {message.channel.send(`https://youtu.be/${x[num].id}`).then(botmessage => {
+        .then(x => {message.channel.send(`https://www.youtube.com/channel/${x[num].channel.id}`).then(botmessage => {
         botmessage.react('⬅️');
         botmessage.react('➡️');
         botmessage.react('❌');
@@ -24,14 +24,14 @@ module.exports = {
         collector.on('collect', reaction =>{
 
             if (reaction.emoji.name === '⬅️' && num > 0) {
-                botmessage.edit(`https://youtu.be/${x[--num].id}`);
+                botmessage.edit(`https://www.youtube.com/channel/${x[--num].channel.id}`);
                 
             } else if (reaction.emoji.name === '➡️' && num <= 10 ){
-                botmessage.edit(`https://youtu.be/${x[++num].id}`);
+                botmessage.edit(`https://www.youtube.com/channel/${x[++num].channel.id}`);
                 
             }
             else if (reaction.emoji.name === '❌'){
-                botmessage.edit(`<https://youtu.be/${x[num].id}>`);
+                botmessage.edit(`<https://www.youtube.com/channel/${x[num].channel.id}>`);
                
             } 
             reaction.users.remove(reaction.users.cache.filter(user => user.id !== botmessage.author.id).first().id)
