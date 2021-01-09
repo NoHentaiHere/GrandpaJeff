@@ -1,6 +1,6 @@
 const ytsrc = require("youtube-sr");
 module.exports = {
-    name: 'yt',
+    name: 'ytc',
     aliases: ['ytc', 'ytchannel'],
     description: "Searches for youtube channels",
     usage: `<your search input>`,
