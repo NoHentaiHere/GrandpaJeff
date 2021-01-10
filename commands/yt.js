@@ -20,7 +20,7 @@ module.exports = {
             return ['⬅️', '➡️', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
         };
 
-        const collector =  botmessage.createReactionCollector(filter, { time: 60000 });
+        const collector =  botmessage.createReactionCollector(filter, { time: 100000 });
         collector.on('collect', reaction =>{
 
             if (reaction.emoji.name === '⬅️' && num > 0) {
