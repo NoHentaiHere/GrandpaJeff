@@ -49,7 +49,7 @@ module.exports = {
         
         var embed = new MessageEmbed()
         .setColor(`#FF0000`)
-        .setAuthor(`%${command.name}`, client.user.avatarURL({format: 'png', dynamic: 'true' }))
+        .setAuthor(`${prefix}${command.name}`, client.user.avatarURL({format: 'png', dynamic: 'true' }))
         .setThumbnail(`https://cdn.discordapp.com/attachments/774330624680001546/775089340312715294/ezgif-3-d715ee28b80c.gif`)
         .addFields(
                        { name: 'Aliases:',  value:`${command.aliases.join(', ')}`, inline: true},

@@ -1,20 +1,15 @@
 const Discord = require ('discord.js');
-
 const client = new Discord.Client();
-
 const config = require('./config.json');
+const fs = require('fs');
+const cooldowns = new Discord.Collection();
+const mongo = require('./mongo');
+const welcome = require('./features/setwelcome')
+const leave = require('./features/setleave')
 
-// const { CommandoClient } = require('discord.js-commando');
 
-const { Structures } = require('discord.js');
 
-const path = require('path');
 
-const { Client, Collection } = require("discord.js");
-const { readdirSync } = require("fs");
-const { join } = require("path");
-client.queue = new Map();
-const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 let token, prefix;
 try {
@@ -26,9 +21,7 @@ try {
   prefix = process.env.prefix;
 }
 
-const fs = require('fs');
 
-const ytdl = require('ytdl-core');
 
 client.login(token);
 
@@ -43,13 +36,32 @@ for(const file of commandFiles){
     client.commands.set(command.name, command);
 }
 
-const cooldowns = new Discord.Collection();
-const welcome = require('./welcome.js')
+
+
 client.on('ready', async () => {
-    console.log('Grandpa Jeff is up and running!');
+    console.log('Online');
     client.user.setActivity("%help | devouring souls", { type: "STREAMING", url: "https://twitch.tv/gelulain" }, ).catch(console.error);
-    welcome(client)
+    welcome(client);
+    leave(client);
 });
+
+
+
+
+
+//MONGO-DB
+
+const connectToMongoDB = async () => {
+  await mongo().then((mongoose) =>{
+    try{
+      console.log('Connected to the database!')
+    }
+    finally {
+    mongoose.connection.close()
+    }
+  })
+}
+connectToMongoDB()
 
 
 
@@ -98,24 +110,9 @@ client.on('message', message =>{
                    message.reply('there was an error trying to execute that command!');
 }
 });
-//Welcome
 
 
-//trying to get the bot to respond to mentions
-
-// client.on('message', message=> {
-//   if(message.author.bot) return;
-//   const args = message.content.slice(prefix.length).split(/ +/);
-//   const command = args.shift().toLowerCase();
-//   if (message.isMentioned(client.users.get('733841341414637598'))) {
-//     if (args[0] === 'fu'){
-//         message.reply('Fuck you too');
-//     }if (args[0] === 'fuck you'){
-//       message.reply('Fuck you too');
-//     } else return;
-// }
-// });
-
+//EasterEggs
 
 client.on("message", (message) => {
 
@@ -140,16 +137,11 @@ client.on("message", (message) => {
     if (message.content == "You know what i think?") {
       message.channel.send({files: [ "https://cdn.discordapp.com/attachments/224116720233611264/744680765274456074/video0_15.mp4"]});
     }
-    if (message.content == `@Kiwi,Rin,Kirinto,Kiri,Ki,KiwiKid#8231 hi bryan`) {
-      message.channel.send("No")
-    }
     if (message.content == "im playing league") {
       message.reply("Are you okay? Do you need help?")
     }
   });
 
-  //@Kiwi,Rin,Kirinto,Kiri,Ki,KiwiKid#8231 hi bryan
-
-
+  
 
  
