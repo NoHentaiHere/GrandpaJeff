@@ -40,7 +40,23 @@ for(const file of commandFiles){
 
 client.on('ready', async () => {
     console.log('Online');
-    client.user.setActivity("%help | devouring souls", { type: "STREAMING", url: "https://twitch.tv/gelulain" }, ).catch(console.error);
+    client.user.setActivity(`${config.prefix}help | Active in ${client.guilds.cache.size} servers!`, {type: 'STREAMING', url: 'https://twitch.tv/gelulain'}).catch(console.error);
+    const status1 = [`${config.prefix}help | devouring souls`, `STREAMING`, `https://twitch.tv/gelulain`]
+    const status2 = [`${config.prefix}help | https://grandpajeff.netlify.app/`, `PLAYING`, `https://grandpajeff.netlify.app/`]
+    const status3 = [`${config.prefix}help | Active in ${client.guilds.cache.size} servers`, `PLAYING`, `https://twitch.tv/gelulain`]
+    const status4 = [`${config.prefix}help | 🎵 Say you can hear - Men I Trust 🎶`, `LISTENING`, `https://twitch.tv/gelulain`]
+    const status5 = [`${config.prefix}help | 🎵 And you don't seem to understand 🎶`, `LISTENING`, `https://twitch.tv/gelulain`]
+    const status6 = [`${config.prefix}help | 🎵 One more love song - Mac DeMarco 🎶`, `LISTENING`, `https://twitch.tv/gelulain`]
+    const status7 = [`${config.prefix}help | ${config.prefix}website`, `PLAYING`, `https://twitch.tv/gelulain`]
+    const status8 = [`${config.prefix}help | devouring souls`, `PLAYING`, `https://twitch.tv/gelulain`]
+    const status9 = [`${config.prefix}help | Ever heard of the wired?`, `PLAYING`, `https://twitch.tv/gelulain`]
+    const status10 = [`${config.prefix}help | ${config.prefix}source`, `PLAYING`, `https://twitch.tv/gelulain`]
+    const statuses = [status1, status2, status3, status4, status5, status6, status7, status8, status9, status10]
+    setInterval(function(){
+      var rstatus = (statuses[Math.floor(Math.random() * statuses.length)]);
+      client.user.setActivity(rstatus[0], {type: rstatus[1], url: rstatus[2]}).catch(console.error);
+      console.log('status changed')
+    }, 3600000)
     welcome(client);
     leave(client);
 });
@@ -97,7 +113,9 @@ client.on('message', message =>{
     
       if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
-        return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+        return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`).then(msg => {msg.delete({ timeout: 5000 })}).catch(console.error);
+       
+    
       }
     }
     timestamps.set(message.author.id, now);
@@ -117,28 +135,28 @@ client.on('message', message =>{
 client.on("message", (message) => {
 
     
-    if (message.content == "shut up woman") {
+    if (message.content.toLowerCase() == "shut up woman") {
       
       message.channel.send({files:["https://cdn.discordapp.com/attachments/224116720233611264/770064295857356800/shutupwoman.mp4"]});
     }
     
-    if (message.content == "goodbye people") {
+    if (message.content.toLowerCase() == "goodbye people") {
       
       message.channel.send({files:["https://cdn.discordapp.com/attachments/480547170076852235/733313606166511737/korones_secret.mp4"]});
     } 
-    if (message.content == "fuck you jeff") {
+    if (message.content.toLowerCase() == "fuck you jeff") {
       
       message.channel.send("Fuck you too");
     } 
-    if (message.content == "Are you?") {
+    if (message.content.toLowerCase() == "are you?") {
       
       message.channel.send({files:["https://cdn.discordapp.com/attachments/441602084681547776/734482821179113486/video0_27_2.mp4"]});
     }
-    if (message.content == "You know what i think?") {
+    if (message.content.toLowerCase() == "you know what i think?") {
       message.channel.send({files: [ "https://cdn.discordapp.com/attachments/224116720233611264/744680765274456074/video0_15.mp4"]});
     }
-    if (message.content == "im playing league") {
-      message.reply("Are you okay? Do you need help?")
+    if (message.content.toLowerCase().includes("im playing league")) {
+      message.channel.send(`Are you okay <@${message.author.id}>? Do you need help?`)
     }
   });
 
