@@ -16,13 +16,14 @@ module.exports = {
         .setThumbnail(client.user.avatarURL({format: 'png', dynamic: 'true', size: 2048}))
         .setColor(`#FF0000`)
         .addFields(
-            { name: "Development version: ", value: botInfo.version },
+            { name: "Development version: ", value: botInfo.version, inline: false },
             { name: "Description: ", value: botInfo.description },
-            { name: "Source Code: ", value: `<https://github.com/NoHentaiHere/GrandpaJeff>` },
-            { name: "Node.js version: ", value: process.version },
-            { name: "Discord.js version: ", value: botInfo.dependencies['discord.js'].replace('^', 'v'), inline: false },
-            { name: "Author: ", value: botInfo.author },
-            { name: "Memory Usage: ", value: `${Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100} MB` },
+            { name: "Author: ", value: `${botInfo.author} - <@214530609220026368>`, inline: false },
+            { name: "Website: ", value: `<https://grandpajeff.netlify.app/>`, inline: false },
+            { name: "Source Code: ", value: `<https://github.com/NoHentaiHere/GrandpaJeff>`, inline: false },
+            { name: "Node.js version: ", value: process.version, inline: true },
+            { name: "Discord.js version: ", value: botInfo.dependencies['discord.js'].replace('^', 'v'), inline: true },
+            { name: "Memory Usage: ", value: `${Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100} MB`, inline: false },
             { name: "Current Uptime: ", value: `${uptime}` },)
         await message.channel.send({ embed: embed})
         

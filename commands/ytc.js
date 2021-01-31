@@ -36,8 +36,10 @@ module.exports = {
             } 
             reaction.users.remove(reaction.users.cache.filter(user => user.id !== botmessage.author.id).first().id)
         });
-            
-        
+        const deleteReactions = function(){
+            botmessage.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
+        }
+        setTimeout(deleteReactions, 60000) 
     })
      
     })
